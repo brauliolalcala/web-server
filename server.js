@@ -3,21 +3,13 @@ var app = express();
 const PORT = 3000;
 
 //Middleware
-var middleware = {
-  requireAuthentication: (req, res, next) => {
-    console.log(`El middleware se está ejecutando`);
-    next();
-  },
-  logger: (req, res, next) => {
-    console.log(`Request: ${req.method} ${req.originalUrl} ${new Date().toString()}`);
-    next();
-  }
-}
- app.use(middleware.logger);
-
+var middleware = require('./middleware');
 
 //Configuraciones
 app.use(express.static(__dirname + '/public'));
+app.use(middleware.logger);
+
+
 
 //Rutas
 
